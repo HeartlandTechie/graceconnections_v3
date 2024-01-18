@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -28,7 +29,24 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Church Metrics')
+                    ->url('https://churchmetrics.com', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-presentation-chart-line')
+                    ->group('Resources')
+                    ->sort(3),
+                NavigationItem::make('YouVersion Church')
+                    ->url('https://www.youversion.church', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-bookmark-square')
+                    ->group('Resources')
+                    ->sort(2),
+                NavigationItem::make('Open Network')
+                    ->url('https://open.life.church', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-arrow-up-on-square-stack')
+                    ->group('Resources')
+                    ->sort(1)
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
