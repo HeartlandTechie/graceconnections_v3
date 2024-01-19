@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire;
- 
+
 use App\Models\InquiryForm;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -11,18 +11,18 @@ use Filament\Forms\Form;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Notifications\Notification;
- 
+
 class Inquiry extends Component implements HasForms
 {
     use InteractsWithForms;
-    
+
     public ?array $data = [];
-    
+
     public function mount(): void
     {
         $this->form->fill();
     }
-    
+
     public function form(Form $form): Form
     {
         return $form
@@ -32,16 +32,16 @@ class Inquiry extends Component implements HasForms
                 TextInput::make('email')->required()
                    ,
                    TextInput::make('phone'),
-               
+
                    Textarea::make('message')->required(),
                 // ...
             ])
             ->statePath('data');
     }
-    
+
     public function create(): void
     {
-      
+
 
         InquiryForm::create($this->form->getState());
 
@@ -50,10 +50,12 @@ class Inquiry extends Component implements HasForms
             ->success()
             ->send();
 
-        $this->redirect('/inquiry_thankyou');
+        $this->form->fill();
+
+        //$this->redirect('/');
 
     }
-    
+
     public function render()
     {
         return view('livewire.inquiry');

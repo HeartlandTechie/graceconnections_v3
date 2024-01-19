@@ -11,11 +11,23 @@ class Person extends Model
 
     protected $guarded = [];
 
+    public function person()
+    {
 
-  public function address()
-  {
-      $this->hasManyThrough(Address::class,Person::class);
-  }
+        return $this->belongsToMany(Address::class);
+
+    }
+
+
+    public function address()
+    {
+        $this->hasManyThrough(Address::class, Person::class);
+    }
+
+    public function growthstatus()
+    {
+        return $this->belongsToMany(GrowthStatus::class);
+    }
 }
 
 

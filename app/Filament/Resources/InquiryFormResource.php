@@ -20,6 +20,16 @@ class InquiryFormResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Front End';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::whereNull('follow_up_date')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::whereNull('follow_up_date')->count() > 1 ? 'danger' : 'primary';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

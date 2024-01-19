@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\AddressExporter;
+use App\Filament\Exports\PersonExporter;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
 use App\Models\Address;
@@ -9,6 +11,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -46,6 +49,11 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('address_1'),
+                Tables\Columns\TextColumn::make('address_2'),
+                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('state'),
+                Tables\Columns\TextColumn::make('zipcode'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -64,6 +72,8 @@ class AddressResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(AddressExporter::class)
                 ]),
             ]);
     }
