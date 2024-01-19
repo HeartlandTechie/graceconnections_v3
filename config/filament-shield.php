@@ -16,6 +16,8 @@ return [
         'fqcn' => 'App\\Models\\User',
     ],
 
+    'nav.group' => 'Front End',
+
     'super_admin' => [
         'enabled' => true,
         'name' => 'super_admin',

@@ -65,12 +65,15 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            ])->plugin(
-                FilamentFullCalendarPlugin::make()
+                //Widgets\FilamentInfoWidget::class,
+            ])->plugins(
+                [FilamentFullCalendarPlugin::make()
                     ->selectable()
                     ->editable(),
-                FilamentShieldPlugin::make()
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                ]
+
+
             )
             ->middleware([
                 EncryptCookies::class,
