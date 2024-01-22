@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('life_event_person', function (Blueprint $table) {
+        Schema::create('growth_status_person', function (Blueprint $table) {
             $table->id();
             $table->foreignId('person_id');
-            $table->foreignId('life_event_id');
+            $table->foreignId('growth_status_id');
+            $table->foreign('person_id')->references('id')
+                ->on('people')->onDelete('cascade');
+            $table->foreign('growth_status_id')->references('id')
+                ->on('growth_statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('life_event_person');
+        Schema::dropIfExists('growth_status_person');
     }
 };

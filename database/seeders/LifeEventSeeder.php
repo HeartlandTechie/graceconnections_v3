@@ -13,10 +13,12 @@ class LifeEventSeeder extends Seeder
      */
     public function run(): void
     {
-        $inputs[] = ['event_name'=> 'Hardware'];
-        $inputs[] = ['event_name'=> 'Software'];
-        $inputs[] = ['event_name'=> 'Planning'];
-        $inputs[] = ['event_name'=> 'Tools'];
+        $inputs[] = ['event_name'=> 'Birth'];
+        $inputs[] = ['event_name'=> 'Baptism'];
+        $inputs[] = ['event_name'=> 'Follower'];
+        $inputs[] = ['event_name'=> 'Volunteer'];
+        $inputs[] = ['event_name'=> 'Engaged'];
+        $inputs[] = ['event_name'=> 'Married'];
 
         LifeEvent::insert($inputs);
 

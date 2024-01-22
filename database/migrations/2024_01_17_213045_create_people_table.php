@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('gender',1)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->text('notes')->nullable();
+            //$table->bigInteger('address_id');
+            $table->foreignID('address_id')->references('id')->on('addresses');
 
             $table->timestamps();
         });

@@ -13,10 +13,17 @@ class GrowthStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $inputs[] = ['status_name'=> 'Hardware'];
-        $inputs[] = ['status_name'=> 'Software'];
-        $inputs[] = ['status_name'=> 'Planning'];
-        $inputs[] = ['status_name'=> 'Tools'];
+        $inputs[] = ['name'=> 'Guest'];
+        $inputs[] = ['name'=> 'Seeker'];
+        $inputs[] = ['name'=> 'Attender'];
+        $inputs[] = ['name'=> 'Volunteer'];
+        $inputs[] = ['name'=> 'Leader'];
+        $inputs[] = ['name'=> 'Small Group Leader'];
+        $inputs[] = ['name'=> 'Team Leader'];
+        $inputs[] = ['name'=> 'Associate Pastor'];
+        $inputs[] = ['name'=> 'Pastor'];
+        $inputs[] = ['name'=> 'Lead Pastor'];
+        $inputs[] = ['name'=> 'Campus Pastor'];
 
         GrowthStatus::insert($inputs);
     }

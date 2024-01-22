@@ -49,6 +49,8 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('person.first_name'),
+                Tables\Columns\TextColumn::make('person.last_name'),
                 Tables\Columns\TextColumn::make('address_1'),
                 Tables\Columns\TextColumn::make('address_2'),
                 Tables\Columns\TextColumn::make('city'),

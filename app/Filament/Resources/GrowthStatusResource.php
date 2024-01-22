@@ -18,13 +18,13 @@ class GrowthStatusResource extends Resource
     protected static ?string $model = GrowthStatus::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup= 'Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('status_name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -34,7 +34,7 @@ class GrowthStatusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('status_name')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

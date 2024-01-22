@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Filament\Resources;
-
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use App\Filament\Exports\PersonExporter;
 use App\Filament\Resources\PersonResource\Pages;
 use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ExportBulkAction;
@@ -40,6 +43,23 @@ class PersonResource extends Resource
                 Forms\Components\Textarea::make('notes')
                     ->maxLength(65535)
                     ->columnSpanFull(),
+                Forms\Components\Select::make('growth')
+                    ->relationship('growthstatus', 'name')
+                    ->label('Growth')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
+                Select::make('address_id')
+                    ->relationship(name: 'address', titleAttribute: 'address_1')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('address_1'),
+                        Forms\Components\Textarea::make('address_2'),
+                        Forms\Components\Textarea::make('city'),
+                        Forms\Components\Textarea::make('state'),
+                        Forms\Components\Textarea::make('zipcode')
+                    ]),
+
+
             ]);
     }
 
@@ -49,13 +69,9 @@ class PersonResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('first')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('middle')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('last')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('nickname')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('gender')
+                Tables\Columns\TextColumn::make('address.fulladdress')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_of_birth')
                     ->date()
@@ -85,10 +101,12 @@ class PersonResource extends Resource
             ]);
     }
 
+
+
     public static function getRelations(): array
     {
         return [
-            RelationManagers\PersonRelationManager::class,
+            RelationManagers\AddressRelationManager::class
         ];
     }
 

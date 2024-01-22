@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.0",
+        "rawilk/filament-password-input": "^1.1",
         "saade/filament-fullcalendar": "^3.0",
         "symfony/http-client": "^6.4",
         "symfony/mailgun-mailer": "^6.4"
