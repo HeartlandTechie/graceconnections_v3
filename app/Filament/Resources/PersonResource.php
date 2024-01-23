@@ -71,8 +71,7 @@ class PersonResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('last')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('address.fulladdress')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('address.fulladdress'),
                 Tables\Columns\TextColumn::make('date_of_birth')
                     ->date()
                     ->sortable(),
