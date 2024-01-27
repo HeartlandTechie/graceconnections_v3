@@ -10,8 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rule;
 use Rawilk\FilamentPasswordInput\Password;
 
 class UserResource extends Resource
@@ -34,6 +33,7 @@ class UserResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Password::make('password')
+                    ->disabledOn('edit')
                     ->label('Password')
                     ->inlineSuffix()
                     ->copyable()
@@ -44,8 +44,17 @@ class UserResource extends Resource
                     ->relationship('roles', 'name')
                     ->multiple()
                     ->preload()
-                    ->searchable()
-
+                    ->searchable(),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('featured_image')
+                    ->live()
+                    ->image()
+                    ->hiddenLabel()
+                    ->collection('avatar')
+                    ->imageEditor()
+                    ->rules(Rule::dimensions()->maxWidth(1024)->maxHeight(800))
+                    ->afterStateUpdated(function (Forms\Contracts\HasForms $livewire, Forms\Components\SpatieMediaLibraryFileUpload $component) {
+                        $livewire->validateOnly($component->getStatePath());
+                    }),
             ]);
     }
 
@@ -79,6 +88,9 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Resources;
+use App\Models\GrowthStatusPerson;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -89,6 +91,40 @@ class PersonResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+               /* Action::make('Edit Status/notes')
+                    ->icon('heroicon-m-pencil-square')
+                    ->form([
+                        Select::make('status')
+                            ->label('Status')
+                            ->options(GrowthStatus::class)
+                            ->default(function (Person $person) {
+                                $status = null;
+
+                                dd($person->growthstatus());
+                                if ($person->growthstatus->name === 'in_progress') {
+                                    $status = OrderStatus::READY->name;
+                                } elseif ($person->growthstatus->name === 'ready') {
+                                    $status = OrderStatus::COMPLETED->name;
+                                } elseif ($person->growthstatus->name === 'completed') {
+                                    $status = OrderStatus::COMPLETED->value;
+                                }
+
+                                return $status;
+                            }),
+                        Forms\Components\Textarea::make('note')
+                            ->label('Notes')
+                    ])
+                    ->action(function (Order $order, array $data): void {
+                        $order->status = $data['status'];
+                        $order->note = $data['note'];
+                        $order->save();
+
+                        Notification::make()
+                            ->title('Updated Order Status and Note')
+                            ->success()
+                            ->send();
+                    }),
+               */
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

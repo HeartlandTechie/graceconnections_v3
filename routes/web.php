@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\PostController_V2;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\BlogHomepageController_V2;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +22,13 @@ Route::view('/', 'welcome');
 //Route::view('/', 'home');
 
 Route::view('/inquiry_thankyou', 'thankyou');
+
+
+Route::prefix('/blogs')->group(function () {
+    Route::get('/', BlogHomepageController_V2::class)->name('home');
+    Route::get('/category/{category:slug}', CategoryController::class)->name('category');
+    Route::get('/post/{post:slug}', PostController_V2::class)->name('post');
+});
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
