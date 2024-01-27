@@ -68,7 +68,7 @@ class PostResource extends Resource
                                     ->image()
                                     ->hiddenLabel()
                                     ->collection('featured_image')
-                                    ->rules(Rule::dimensions()->maxWidth(601)->maxHeight(801))
+                                    //->rules(Rule::dimensions()->maxWidth(601)->maxHeight(801))
                                     ->afterStateUpdated(function (Forms\Contracts\HasForms $livewire, Forms\Components\SpatieMediaLibraryFileUpload $component) {
                                         $livewire->validateOnly($component->getStatePath());
                                     }),
