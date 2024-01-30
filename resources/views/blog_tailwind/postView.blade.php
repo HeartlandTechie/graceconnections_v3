@@ -6,7 +6,7 @@
 
         <div class="mb-4 md:mb-0 w-full mx-auto relative">
             <div class="px-4 lg:px-0">
-                <h2 class="text-4xl font-semibold text-stone-50 leading-tight">
+                <h2 class="text-4xl font-semibold text-gray-900 dark:text-stone-50 leading-tight">
                     {{ $post->title }}
                 </h2>
                 <a
@@ -23,7 +23,7 @@
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
 
-            <div class="px-4 lg:px-0 mt-12 text-amber-50 text-lg leading-relaxed w-full lg:w-3/4">
+            <div class="px-4 lg:px-0 mt-12 text-gray-500 dark: text-amber-50 text-lg leading-relaxed w-full lg:w-3/4">
                 {!! $post->content !!}
 
             </div>
